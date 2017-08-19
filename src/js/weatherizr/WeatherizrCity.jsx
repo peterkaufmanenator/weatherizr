@@ -68,8 +68,41 @@ export default class WeatherizrCity extends React.Component {
 
 // "Dumb" component that just renders the icon, description, and time.
 function WeatherEntry(props) {
+
+  //Rendering the correct icon is slightly complex.  We get the first part of the class name from the icon name
+  //in the API:
+  let icon = (props.data.weather[0].icon.match(/d/)) ? 'wi wi-day-' : 'wi wi-night-';
+
+  //The rest of the icon name is determined by the description.
+  let weatherDescription = props.data.weather[0].description;
+
+  //We match up the most common weather patterns and select an appropriate icon based on that.  Note that
+  //not every weather pattern (e.g. hail, volcanoes, earthquakes) are accounted for.
+  //Taken from: https://erikflowers.github.io/weather-icons/
+
+  if(weatherDescription.match(/thunderstorm/)) {
+    icon += 'thunderstorm';
+  }
+  else if(weatherDescription.match(/rain/)) {
+    icon += 'rain';
+  }
+  else if(weatherDescription.match(/snow/)) {
+    icon += 'snow';
+  }
+  else if(weatherDescription.match(/cloud|mist/)) {
+    icon += 'cloudy';
+  }
+  else {
+    if(icon.match(/day/)) {
+      icon += 'sunny';
+    }
+    else {
+      icon += 'clear';
+    }
+  }
+
   return <div className="weather-entry">
-    <img className="icon" src={ `http://openweathermap.org/img/w/${props.data.weather[0].icon}.png` } />
+    <div className="icon"><i className={icon}></i></div>
     <div className="description">{props.data.weather[0].description}</div>
     <div className="time">{props.data.dt_txt}</div>
   </div>;
