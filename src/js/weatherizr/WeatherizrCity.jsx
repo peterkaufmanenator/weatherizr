@@ -69,9 +69,18 @@ export default class WeatherizrCity extends React.Component {
 // "Dumb" component that just renders the icon, description, and time.
 function WeatherEntry(props) {
 
-  //Rendering the correct icon is slightly complex.  We get the first part of the class name from the icon name
+  //Rendering the correct icon is slightly complex.  We get a day or not icon based on the display time.
   //in the API:
-  let icon = (props.data.weather[0].icon.match(/d/)) ? 'wi wi-day-' : 'wi wi-night-';
+  let icon = 'wi wi-day-';
+
+  console.log(props.data.dt_txt);
+
+  if(props.data.dt_txt.match(/21:00:00|00:00:00|03:00:00|06:00:00/)) {
+    icon = 'wi wi-night-';
+  }
+  else {
+    console.log('No match');
+  }
 
   //The rest of the icon name is determined by the description.
   let weatherDescription = props.data.weather[0].description;
@@ -104,6 +113,6 @@ function WeatherEntry(props) {
   return <div className="weather-entry">
     <div className="icon"><i className={icon}></i></div>
     <div className="description">{props.data.weather[0].description}</div>
-    <div className="time">{props.data.dt_txt}</div>
+    <div className="time">{props.data.dt_txt.replace(/:00$/, '')}</div>
   </div>;
 }

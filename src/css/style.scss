@@ -51,6 +51,15 @@ body {
           font-size: 80px;
           color: #924da3;
         }
+
+      }
+
+      .description {
+        font-weight: bold;
+      }
+
+      .description::first-letter {
+        text-transform: capitalize;
       }
 
     }
