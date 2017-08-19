@@ -15,4 +15,24 @@ body {
 		text-align: center;
 		font-size: 60px;
 	}
+
+	.weatherizr-city {
+
+		padding: 20px;
+		border: 1px solid #ccc;
+		margin-bottom: 10px;
+
+		.weather-entry {
+
+			display: inline-block;
+			width: 200px;
+
+			.icon {
+				margin-left: auto;
+				margin-right: auto;
+				display: block;
+			}
+
+		}
+	}
 }
