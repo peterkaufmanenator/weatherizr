@@ -73,13 +73,8 @@ function WeatherEntry(props) {
   //in the API:
   let icon = 'wi wi-day-';
 
-  console.log(props.data.dt_txt);
-
   if(props.data.dt_txt.match(/21:00:00|00:00:00|03:00:00|06:00:00/)) {
     icon = 'wi wi-night-';
-  }
-  else {
-    console.log('No match');
   }
 
   //The rest of the icon name is determined by the description.
