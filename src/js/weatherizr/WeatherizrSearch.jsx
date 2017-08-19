@@ -12,35 +12,36 @@ const dataSourceConfig = {
 export default class WeatherizrSearch extends React.Component {
 
   constructor(props) {
-  	super(props);
-  	this.handleAddCity = this.handleAddCity.bind(this);
-  	this.state = {'searchText': ''};
-  	this.handleUpdateInput = this.handleUpdateInput.bind(this);
+    super(props);
+    this.handleAddCity = this.handleAddCity.bind(this);
+    this.state = {'searchText': ''};
+    this.handleUpdateInput = this.handleUpdateInput.bind(this);
   }
 
   handleUpdateInput(searchText) {
-  	this.setState({'searchText': searchText});
+    this.setState({'searchText': searchText});
   }
 
   handleAddCity(chosenRequest) {
-  	this.setState({'searchText': ''});
-  	this.props.onAddCity({'id': chosenRequest.id, 'name': chosenRequest.name});
+    this.setState({'searchText': ''});
+    this.props.onAddCity({'id': chosenRequest.id, 'name': chosenRequest.name});
   }
 
   render() {
     return (
       <div className="weatherizr-search">
-			<AutoComplete
-				floatingLabelText="Select a city."
-				searchText={this.state.searchText}
-				onUpdateInput={this.handleUpdateInput}
-				filter={AutoComplete.noFilter}
-				openOnFocus={true}
-				dataSource={source}
-				dataSourceConfig={dataSourceConfig}
-				onNewRequest={this.handleAddCity}
-				fullWidth={true}
-			/>
+      <AutoComplete
+        floatingLabelText="Select a city."
+        searchText={this.state.searchText}
+        onUpdateInput={this.handleUpdateInput}
+        filter={AutoComplete.noFilter}
+        openOnFocus={true}
+        dataSource={source}
+        dataSourceConfig={dataSourceConfig}
+        onNewRequest={this.handleAddCity}
+        filter={(searchText, key) => (key.indexOf(searchText) !== -1)}
+        fullWidth={true}
+      />
       </div>
     );
   }
