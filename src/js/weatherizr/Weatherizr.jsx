@@ -11,9 +11,32 @@ export default class Weatherizr extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {'cities': []};
+    
+    //We load the city data from localStorage, if it's present.
+    if(localStorage.getItem('city-data')) {
+      this.state = JSON.parse(localStorage.getItem('city-data'));
+      this.state.cities.forEach((city, index) => {
+        $.getJSON(`http://api.openweathermap.org/data/2.5/forecast?id=${city.id}&mode=json&appid=${apiKey}&callback=?`, (data) => {
+
+          let cityClone = JSON.parse(JSON.stringify(this.state.cities));
+          let weather = data.list;
+          cityClone[index].weather = weather;
+          this.setState({'cities': cityClone});
+
+        });
+      });
+    }
+    else {
+      this.state = {'cities': []};
+    }
+
     this.handleAddCity = this.handleAddCity.bind(this);
     this.handleDeleteCity = this.handleDeleteCity.bind(this);
+
+  }
+
+  saveState() {
+    localStorage.setItem('city-data', JSON.stringify(this.state));
   }
 
   handleAddCity(city) {
@@ -22,12 +45,14 @@ export default class Weatherizr extends React.Component {
     $.getJSON(`http://api.openweathermap.org/data/2.5/forecast?id=${city.id}&mode=json&appid=${apiKey}&callback=?`, (data) => {
       city.weather = data.list;
       this.setState({'cities': this.state.cities.concat([city])});
+      this.saveState();
     });
 
   }
 
   handleDeleteCity(index) {
     this.setState({'cities': this.state.cities.slice(0, index).concat(this.state.cities.slice(index+1))});
+    this.saveState();
   }
 
   render() {
