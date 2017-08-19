@@ -50,6 +50,7 @@ To-do
 
 With a little bit more time, here's some things that would help this project:
 
+* A server side search function for the city list.
 * A bit better styling.
 * Use a different widget for autcomplete for mobile.
 * Add in the ability to reorder cities.
