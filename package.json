@@ -1,7 +1,7 @@
 {
-  "name": "photo-gallery",
+  "name": "Weatherizr",
   "version": "1.0.0",
-  "description": "HTML5/CSS3 photo gallery example",
+  "description": "Weatherizr example",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --open",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "github:peterkaufmanenator/photo-gallery.git"
+    "url": "github:peterkaufmanenator/weatherizr.git"
   },
   "author": "Peter Kaufman <peterkaufmanenator@gmail.com>",
   "license": "MIT",

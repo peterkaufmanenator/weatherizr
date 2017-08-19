@@ -10,7 +10,7 @@ module.exports = {
 	plugins: [
 		new CleanWebpackPlugin(['dist']),
 		new HtmlWebpackPlugin({
-			title: 'Gallery',
+			title: 'Weatherizr',
 			template: 'src/index.ejs',
 		}),
 		new GoogleFontsPlugin({
