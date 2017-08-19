@@ -13,6 +13,7 @@ export default class Weatherizr extends React.Component {
     super(props);
     this.state = {'cities': []};
     this.handleAddCity = this.handleAddCity.bind(this);
+    this.handleDeleteCity = this.handleDeleteCity.bind(this);
   }
 
   handleAddCity(city) {
@@ -25,14 +26,19 @@ export default class Weatherizr extends React.Component {
 
   }
 
+  handleDeleteCity(index) {
+    this.setState({'cities': this.state.cities.slice(0, index).concat(this.state.cities.slice(index+1))});
+  }
+
   render() {
 
     return <MuiThemeProvider>
       <div className="app">
         <h1>Weatherizr</h1>
+        <h3>Start typing to select a city to follow the weather of....</h3>
         <WeatherizrSearch onAddCity={this.handleAddCity}></WeatherizrSearch>
         {this.state.cities.map((city, index) => {
-          return <WeatherizrCity city={city} key={index}></WeatherizrCity>;
+          return <WeatherizrCity onDeleteCity={this.handleDeleteCity} index={index} city={city} key={index}></WeatherizrCity>;
         })}
       </div>
     </MuiThemeProvider>;
