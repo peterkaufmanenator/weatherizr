@@ -16,7 +16,7 @@ export default class Weatherizr extends React.Component {
     if(localStorage.getItem('city-data')) {
       this.state = JSON.parse(localStorage.getItem('city-data'));
       this.state.cities.forEach((city, index) => {
-        $.getJSON(`http://api.openweathermap.org/data/2.5/forecast?id=${city.id}&mode=json&appid=${apiKey}&callback=?`, (data) => {
+        $.getJSON(`//api.openweathermap.org/data/2.5/forecast?id=${city.id}&mode=json&appid=${apiKey}&callback=?`, (data) => {
 
           let cityClone = JSON.parse(JSON.stringify(this.state.cities));
           let weather = data.list;
@@ -42,7 +42,7 @@ export default class Weatherizr extends React.Component {
   handleAddCity(city) {
 
     //We first get the weather from the JSON call, then we append the city to the state param.
-    $.getJSON(`http://api.openweathermap.org/data/2.5/forecast?id=${city.id}&mode=json&appid=${apiKey}&callback=?`, (data) => {
+    $.getJSON(`//api.openweathermap.org/data/2.5/forecast?id=${city.id}&mode=json&appid=${apiKey}&callback=?`, (data) => {
       city.weather = data.list;
       this.setState({'cities': this.state.cities.concat([city])});
       this.saveState();
