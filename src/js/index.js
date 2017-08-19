@@ -3,4 +3,3 @@ import '../css/font-awesome/css/font-awesome.min.css';
 import '../css/style.scss';
 
 bootstrapApp();
-
